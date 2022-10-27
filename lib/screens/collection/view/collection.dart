@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:provider/provider.dart';
 import 'package:walpapper_app/screens/collection/provider/provider.dart';
@@ -6,8 +7,7 @@ import 'package:walpapper_app/screens/fullScreen/view/fullscreen.dart';
 import 'package:walpapper_app/screens/services/api/api_images.dart';
 
 class Collection extends StatelessWidget {
-  const Collection({Key? key}) : super(key: key);
-
+  const Collection({Key? key,}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,15 +20,15 @@ class Collection extends StatelessWidget {
                     onRefresh: () => ApiWalpapper().getCollections(),
                     child: Column(children: [
                       Padding(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 20, vertical: 30),
+                        padding:  EdgeInsets.symmetric(
+                            horizontal: 20.w, vertical: 30.h),
                         child: Center(
                           child: Row(
                             children: [
                               Column(
                                 children: [
-                                  const SizedBox(
-                                    width: 20,
+                                   SizedBox(
+                                    width: 20.h,
                                   ),
                                   Text(
                                     "Nature",
@@ -42,15 +42,18 @@ class Collection extends StatelessWidget {
                           ),
                         ),
                       ),
-                      Expanded(child: Consumer<HomeProvider>(
+                      Expanded(child:
+                       Consumer<CollectionProvider>(
+
                           builder: (context, value, child) {
+                            
                         final item = value.curtedData;
                         if (item == null) {
                           return const Center(
                               child: CircularProgressIndicator());
                         } else {
                           return GridView.custom(
-                              physics: const BouncingScrollPhysics(),
+                              physics:  const BouncingScrollPhysics(),
                               gridDelegate: SliverWovenGridDelegate.count(
                                 crossAxisCount: 2,
                                 mainAxisSpacing: 0,
@@ -70,8 +73,8 @@ class Collection extends StatelessWidget {
                                   padding: const EdgeInsets.all(8.0),
                                   child: Container(
                                       clipBehavior: Clip.hardEdge,
-                                      height: 50,
-                                      width: 60,
+                                      height: 50.h,
+                                      width: 60.w,
                                       decoration: BoxDecoration(
                                         borderRadius: BorderRadius.circular(30),
                                         color: Colors.white,

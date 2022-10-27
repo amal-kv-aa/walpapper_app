@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:walpapper_app/screens/fullScreen/view/widget/button.dart';
 
 class FullScreen extends StatelessWidget {
@@ -18,7 +19,7 @@ class FullScreen extends StatelessWidget {
                     image: NetworkImage(url), fit: BoxFit.cover)),
           ),
           Padding(
-            padding: const EdgeInsets.only(bottom: 16),
+            padding:  EdgeInsets.only(bottom: 16.h),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children:  const [

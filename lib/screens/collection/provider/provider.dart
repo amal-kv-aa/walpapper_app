@@ -5,8 +5,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:walpapper_app/screens/collection/model/curted_models.dart';
 import 'package:walpapper_app/screens/services/api/api_images.dart';
 
-class HomeProvider with ChangeNotifier{
- HomeProvider(){
+class CollectionProvider with ChangeNotifier{
+ CollectionProvider(){
   getImages();
  }
  CurtedModel? curtedData;
