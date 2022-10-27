@@ -82,18 +82,17 @@ class SearchWalpapper extends StatelessWidget {
                                           Navigator.of(context).push(
                                               MaterialPageRoute(
                                                   builder: (ctx) => FullScreen(
-                                                      url: item.photos[index]
-                                                          .src.original)));
+                                                      url: item.photos[index].src)));
                                         },
-                                        child: Container(
-                                          decoration: BoxDecoration(
-                                              image: DecorationImage(
-                                                  image: NetworkImage(
+                                        child: 
+                                        FadeInImage(placeholder: NetworkImage(
+                                          item.photos[index].src.portrait,
+                                        ), image: 
+                                        NetworkImage(
                                                     item.photos[index].src
                                                         .original,
-                                                  ),
-                                                  fit: BoxFit.cover)),
-                                        ),
+                                                  ),fit: BoxFit.cover,
+                                        )
                                       )),
                                 );
                               }));

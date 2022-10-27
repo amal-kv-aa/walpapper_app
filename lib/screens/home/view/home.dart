@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:walpapper_app/screens/collection/provider/provider.dart';
+import 'package:walpapper_app/screens/collection/view/collection.dart';
 import 'package:walpapper_app/screens/fullScreen/view/fullscreen.dart';
 import 'package:walpapper_app/screens/home/view/widget/bottomnav/bottomnav.dart';
 import 'package:walpapper_app/screens/home/view/widget/card/custom_card.dart';
@@ -38,13 +39,21 @@ class Home extends StatelessWidget {
                     height: 50.h,
                   ),
                   const SearchField(),
-                  Padding(
-                    padding:
-                        EdgeInsets.symmetric(vertical: 30.h, horizontal: 20.w),
-                    child: Text(
-                      "Best of month",
-                      style: Theme.of(context).textTheme.titleMedium,
-                    ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Padding(
+                        padding:
+                            EdgeInsets.symmetric(vertical: 30.h, horizontal: 20.w),
+                        child: Text(
+                          "Best of month",
+                          style: Theme.of(context).textTheme.titleMedium,
+                        ),
+                      ),
+                      TextButton(child:
+                          const Text("view all >"),onPressed: ()=>Navigator.of(context).push(MaterialPageRoute(builder:(ctx)=>const Collection()),)
+                        ),
+                    ],
                   ),
                   SizedBox(
                     height: 240,
@@ -58,7 +67,7 @@ class Home extends StatelessWidget {
                               MaterialPageRoute(
                                   builder: (ctx) => FullScreen(
                                       url: value.curtedData!.photos[index + 15]
-                                          .src.large))),
+                                          .src))),
                           child: Padding(
                             padding: const EdgeInsets.all(10),
                             child: Container(

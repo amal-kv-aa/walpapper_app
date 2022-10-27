@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CustomButton extends StatelessWidget {
-  const CustomButton({Key? key, required this.icon, required this.text,this.color})
+  const CustomButton(
+      {Key? key, required this.icon, required this.text, this.color})
       : super(key: key);
   final IconData icon;
   final String text;
@@ -16,7 +17,8 @@ class CustomButton extends StatelessWidget {
           height: 60,
           width: 70,
           decoration: BoxDecoration(
-              color: color?? Theme.of(context).backgroundColor.withOpacity(0.2),
+              color:
+                  color ?? Theme.of(context).backgroundColor.withOpacity(0.4),
               borderRadius: BorderRadius.circular(25.r)),
           child: Center(
             child: Icon(
@@ -25,12 +27,13 @@ class CustomButton extends StatelessWidget {
             ),
           ),
         ),
-         SizedBox(
+        SizedBox(
           height: 10.h,
         ),
         Text(
           text,
-          style: const TextStyle(color: Colors.white60),
+          style: const TextStyle(
+              color: Colors.white60, fontWeight: FontWeight.w800),
         )
       ],
     );
