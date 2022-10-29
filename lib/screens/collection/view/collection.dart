@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:walpapper_app/screens/collection/provider/provider.dart';
 import 'package:walpapper_app/screens/fullScreen/view/fullscreen.dart';
 import 'package:walpapper_app/screens/services/api/api_images.dart';
+import 'package:walpapper_app/screens/widgets/color/color_from_api.dart';
 
 class Collection extends StatelessWidget {
   const Collection({
@@ -37,7 +38,7 @@ class Collection extends StatelessWidget {
                                 pattern: [
                                   const WovenGridTile(1),
                                   const WovenGridTile(
-                                    2.2 / 3,
+                                    4 / 3.3,
                                     crossAxisRatio: 1,
                                   ),
                                 ],
@@ -45,22 +46,27 @@ class Collection extends StatelessWidget {
                               childrenDelegate: SliverChildBuilderDelegate(
                                   childCount: item.photos.length,
                                   (context, index) {
+                                final color = item.photos[index].avgColor
+                                    .replaceFirst('#', '');
+                                Color colorFromImage = HexColor(color);
+
                                 return Padding(
-                                  padding: const EdgeInsets.all(8.0),
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 10),
                                   child: Container(
                                       clipBehavior: Clip.hardEdge,
                                       height: 50.h,
                                       width: 60.w,
                                       decoration: BoxDecoration(
                                         borderRadius: BorderRadius.circular(30),
-                                        color: Colors.white,
+                                        color: colorFromImage,
                                       ),
                                       child: GestureDetector(
                                           onTap: () {
                                             Navigator.of(context).push(
                                                 MaterialPageRoute(
                                                     builder: (ctx) =>
-                                                        FullScreen(
+                                                        FullScreen(color: colorFromImage,
                                                             url: item
                                                                 .photos[index]
                                                                 .src)));

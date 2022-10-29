@@ -1,23 +1,31 @@
-
-import 'dart:developer';
-
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:walpapper_app/screens/collection/model/curted_models.dart';
 import 'package:walpapper_app/screens/services/api/api_images.dart';
 
-class CollectionProvider with ChangeNotifier{
- CollectionProvider(){
-  getImages();
- }
- CurtedModel? curtedData;
+class CollectionProvider with ChangeNotifier {
+  CurtedModel? curtedData;
 
-  getImages(){
+  getImages(BuildContext context) {
     ApiWalpapper().getCollections().then((value) => {
-      if(value != null){
-        curtedData = value,
-        log(curtedData!.photos[0].src.original),
-        notifyListeners()
-      }
-    });
+          if (value != null && value.err == null)
+            {
+              curtedData = value,
+              notifyListeners()
+            }
+          else if (value != null && value.err == "SocketException")
+            {
+              curtedData = value,
+              notifyListeners(),
+              ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                  content: Text("check your internet connection")))
+            }
+          else
+            {
+              curtedData = value,
+              notifyListeners(),
+              ScaffoldMessenger.of(context)
+                  .showSnackBar(const SnackBar(content: Text("somthing went wrong..")))
+            }
+        });
   }
 }

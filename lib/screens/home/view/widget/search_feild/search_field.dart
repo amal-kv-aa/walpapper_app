@@ -19,28 +19,33 @@ class SearchField extends StatelessWidget {
             controller: context.watch<SearchProvider>().searchController,
             decoration: InputDecoration(
               border: OutlineInputBorder(
-                
                 borderRadius: BorderRadius.circular(15),
               ),
               fillColor: Colors.white,
               filled: true,
               hintText: "Find walpapper...",
-              hintStyle: const TextStyle(fontSize: 20,color: Colors.black45),
+              hintStyle: const TextStyle(fontSize: 20, color: Colors.black45),
               suffixIcon: IconButton(
-                icon:  Icon(Icons.search,color:context.watch<SearchProvider>().isShow ? Colors.cyan : Colors.black45,),
+                icon: Icon(
+                  Icons.search,
+                  color: context.watch<SearchProvider>().isShow
+                      ? Colors.cyan
+                      : Colors.black45,
+                ),
                 color: Colors.black45,
                 onPressed: () {
-                  context.read<SearchProvider>().toSearch(context,context.watch<SearchProvider>().searchController.text);
+                  context.read<SearchProvider>().toSearch(context, null);
                 },
               ),
             ),
           ),
         ),
-        context.watch<SearchProvider>().isShow
+        context.watch<SearchProvider>().searchController.text.isNotEmpty
             ? Padding(
                 padding: EdgeInsets.symmetric(horizontal: 20.w),
                 child: SizedBox(
-                  height: 160.h,
+                  height:
+                      context.watch<SearchProvider>().search.isEmpty ? 0 : 50,
                   child: ListView.builder(
                     itemCount: context.watch<SearchProvider>().search.length,
                     itemBuilder: (context, index) {
@@ -48,12 +53,18 @@ class SearchField extends StatelessWidget {
                       return Column(
                         children: [
                           ListTile(
-                            onTap: () { context
-                                .read<SearchProvider>()
-                                .searchController
-                                .text = temp[index];
-                                context.read<SearchProvider>().toSearch(context,context.read<SearchProvider>().searchController.text);
-                                },
+                            onTap: () {
+                              context
+                                  .read<SearchProvider>()
+                                  .searchController
+                                  .text = temp[index];
+                              context.read<SearchProvider>().toSearch(
+                                  context,
+                                  context
+                                      .read<SearchProvider>()
+                                      .searchController
+                                      .text);
+                            },
                             title: Text(
                               temp[index],
                               style: const TextStyle(fontSize: 16),

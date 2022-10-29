@@ -13,11 +13,13 @@ class CurtedModel {
         required this.page,
         required this.perPage,
         required this.photos,
+        this.err,
     });
 
     int page;
     int perPage;
     List<Photo> photos;
+    String? err;
 
     factory CurtedModel.fromJson(Map<String, dynamic> json) => CurtedModel(
         page: json["page"],

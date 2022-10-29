@@ -14,13 +14,26 @@ class Loading {
               onWillPop: () async {
                 return false;
               },
-              child: const AlertDialog(
-                  elevation: 0,
-                  backgroundColor: Colors.transparent,
-                  title: Center(child: CircularProgressIndicator())),
+              child: Center(
+                child: AlertDialog(
+                    elevation: 0,
+                    backgroundColor: Colors.transparent,
+                    content: Center(child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: const [
+                        CircularProgressIndicator(),
+                        SizedBox(height: 30,),
+                        Text("Loading pleas wait..",style: TextStyle(color: Colors.cyan),),
+                        
+                      ],
+                    ),),
+                    ),
+              ),
+                  
             );
           });
     } else {
+      return
       Navigator.pop(context);
     }
   }
